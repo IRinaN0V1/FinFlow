@@ -32,12 +32,17 @@ FinFlow — это учебный проект, демонстрирующий �
 # Запуск через Docker
 
 Сборка приложения:
+
 ./mvnw clean package
 
-Запуск PostgreSQL и приложения
+Запуск PostgreSQL и приложения:
+
 docker-compose up --build
 
-Приложение будет доступно: http://localhost:8080
+Приложение будет доступно: 
+
+http://localhost:8080
 
 Остановка:
+
 docker-compose down
