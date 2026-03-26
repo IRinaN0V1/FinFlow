@@ -1,13 +1,13 @@
 package com.example.finflow.controller;
 
+import com.example.finflow.dto.UserDto;
 import com.example.finflow.model.User;
 import com.example.finflow.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -17,12 +17,12 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody Map<String, String> request) {
-        String email = request.get("email");
-        String name = request.get("name");
-        String password = request.get("password");
-
-        User user = userService.createUser(email, name, password);
+    public ResponseEntity<User> createUser(@Valid @RequestBody UserDto userDto) {
+        User user = userService.createUser(
+                userDto.getEmail(),
+                userDto.getName(),
+                userDto.getPassword()
+        );
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
